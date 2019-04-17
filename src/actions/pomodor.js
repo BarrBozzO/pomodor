@@ -1,4 +1,4 @@
-const { START_TIMER, PAUSE_TIMER, RESET_TIMER, TICK_TIMER } from './types';
+import { START_TIMER, PAUSE_TIMER, RESET_TIMER, TICK_TIMER } from "./types";
 
 let timerInterval = null;
 
@@ -8,7 +8,7 @@ const startTimer = () => {
     payload: {
       paused: false
     }
-  }
+  };
 };
 
 const pauseTimer = () => {
@@ -17,20 +17,20 @@ const pauseTimer = () => {
     payload: {
       paused: true
     }
-  }
+  };
 };
 
 const tickTimer = () => {
   return {
     type: TICK_TIMER
-  }
+  };
 };
 
-export const handleStartTimer = () => (dispatch) => {
-  timerInterval = setInterval( () => {
-     console.log('increment timer');
-     dispatch(tickTimer());
-  }, 1000 )
+export const handleStartTimer = () => dispatch => {
+  timerInterval = setInterval(() => {
+    console.log("increment timer");
+    dispatch(tickTimer());
+  }, 1000);
 };
 
 export const handlePauseTimer = () => {
