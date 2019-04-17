@@ -1,13 +1,20 @@
 import React, { Component } from "react";
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import "../assets/css/App.css";
-import TaskContainer from "./task/TaskContainer";
+import Main from "./Main";
+import NotFound from "./NotFound";
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <TaskContainer />
-      </div>
+      <Router>
+        <div className="App">
+          <Switch>
+            <Route exact path="/" component={Main} />
+            <Route component={NotFound} />
+          </Switch>
+        </div>
+      </Router>
     );
   }
 }
