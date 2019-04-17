@@ -1,15 +1,26 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
-import Pomodor from './Pomodor';
+import Pomodor from "./Pomodor";
+import { handleStartTimer, handlePauseTimer } from "../../actions/pomodor";
 
 class PomodorContainer extends Component {
   render() {
     return (
       <div>
-        <Pomodor />
+        <Pomodor pomodor={this.props.pomodor} />
       </div>
     );
   }
 }
 
-export default PomodorContainer;
+const mapStateToProps = state => {
+  return {
+    pomodor: state.pomodor
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { handleStartTimer, handlePauseTimer }
+)(PomodorContainer);
