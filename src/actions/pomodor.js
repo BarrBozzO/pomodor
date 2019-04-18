@@ -27,8 +27,8 @@ const tickTimer = () => {
 };
 
 export const handleStartTimer = () => dispatch => {
+  dispatch(startTimer());
   timerInterval = setInterval(() => {
-    console.log("increment timer");
     dispatch(tickTimer());
   }, 1000);
 };

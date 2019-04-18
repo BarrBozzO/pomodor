@@ -22,4 +22,5 @@ Pomodor.propTypes = {
   handlePauseTimer: PropTypes.func.isRequired
 };
 
+
 export default Pomodor;

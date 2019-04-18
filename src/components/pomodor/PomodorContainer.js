@@ -8,7 +8,7 @@ class PomodorContainer extends Component {
   render() {
     return (
       <div>
-        <Pomodor pomodor={this.props.pomodor} />
+        <Pomodor pomodor={this.props.pomodor} handleStartTimer={this.props.handleStartTimer} handlePauseTimer={this.props.handlePauseTimer} />
       </div>
     );
   }

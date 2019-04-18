@@ -4,8 +4,8 @@ import PropTypes from "prop-types";
 function PomodorTimerControls(props) {
   return (
     <div>
-      <button>start</button>
-      <button>pause</button>
+      <button onClick={props.handleStart}>start</button>
+      <button onClick={props.handlePause}>pause</button>
     </div>
   );
 }

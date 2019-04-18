@@ -7,7 +7,7 @@ import {
 
 const initialState = {
   timer: {
-    time: 0,
+    time: 25000,
     paused: true
   }
 };
@@ -25,11 +25,13 @@ const pomodorReducer = (state = initialState, action) => {
         }
       };
     case TICK_TIMER:
-      return {
+      if (state.timer.paused) return state;
+      else return {
         ...state,
         timer: {
           ...state.timer,
-          time: state.timer.time - 1000
+          time: state.timer.time - 1000,
+          paused: (state.timer.time - 1000) <= 0
         }
       };
     case RESET_TIMER:
