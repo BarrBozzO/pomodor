@@ -2,13 +2,18 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import Pomodor from "./Pomodor";
-import { handleStartTimer, handlePauseTimer } from "../../actions/pomodor";
+import { startTimer, pauseTimer, stopTimer } from "../../actions/pomodor";
 
 class PomodorContainer extends Component {
   render() {
     return (
       <div>
-        <Pomodor pomodor={this.props.pomodor} handleStartTimer={this.props.handleStartTimer} handlePauseTimer={this.props.handlePauseTimer} />
+        <Pomodor
+          pomodor={this.props.pomodor}
+          handleStartTimer={this.props.startTimer}
+          handlePauseTimer={this.props.pauseTimer}
+          handleStopTimer={this.props.stopTimer}
+        />
       </div>
     );
   }
@@ -22,5 +27,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { handleStartTimer, handlePauseTimer }
+  { startTimer, pauseTimer, stopTimer }
 )(PomodorContainer);

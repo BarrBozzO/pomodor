@@ -8,9 +8,10 @@ function Pomodor(props) {
   return (
     <div>
       <Timer
-        time={timer.time}
+        timer={timer}
         handleStart={props.handleStartTimer}
         handlePause={props.handlePauseTimer}
+        handleStop={props.handleStopTimer}
       />
     </div>
   );
@@ -19,8 +20,8 @@ function Pomodor(props) {
 Pomodor.propTypes = {
   pomodor: PropTypes.object.isRequired,
   handleStartTimer: PropTypes.func.isRequired,
-  handlePauseTimer: PropTypes.func.isRequired
+  handlePauseTimer: PropTypes.func.isRequired,
+  handleStopTimer: PropTypes.func.isRequired
 };
-
 
 export default Pomodor;

@@ -1,12 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import { convertToDisplay } from "../../utils/timer";
+
 function PomodorTimerDisplay(props) {
-  return (
-    <div>
-      {props.time}
-    </div>
-  );
+  return <div>{convertToDisplay(props.time)}</div>;
 }
 
 PomodorTimerDisplay.propTypes = {
