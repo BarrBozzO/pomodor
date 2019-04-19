@@ -1,32 +1,35 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+
+import { addTask, removeTask, toggleTask } from "../../actions/tasks";
+
 import TaskForm from "./TaskForm";
 import TaskList from "./TaskList";
 
 class TaskContainer extends Component {
   render() {
-    const tasks = [
-      {
-        id: 1,
-        label: "test",
-        description: "awdawdwad"
-      },
-      {
-        id: 2,
-        label: "awdtest",
-        description: "aawdwdawdwad"
-      }
-    ];
     return (
       <div>
-        <TaskForm />
+        <TaskForm handleAdd={this.props.addTask} />
         <TaskList
-          tasks={tasks}
-          handleRemove={() => console.log("1")}
-          handleStateChange={() => console.log("1")}
+          tasks={this.props.tasks}
+          handleRemove={this.props.removeTask}
+          handleToggle={this.props.toggleTask}
         />
       </div>
     );
   }
 }
 
-export default TaskContainer;
+const mapStateToProps = state => ({
+  tasks: state.tasks
+});
+
+export default connect(
+  mapStateToProps,
+  {
+    addTask,
+    removeTask,
+    toggleTask
+  }
+)(TaskContainer);

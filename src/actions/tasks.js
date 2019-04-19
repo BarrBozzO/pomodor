@@ -1,22 +1,28 @@
-import {ADD_TASK, REMOVE_TASK, TOGGLE_TASK_COMPLETE_STATE} from './types';
+import { ADD_TASK, REMOVE_TASK, TOGGLE_TASK_COMPLETE_STATE } from "./types";
+import uuidv4 from "uuid/v4";
 
-export const addTask = (newTask) => ({
+export const addTask = ({ label, description }) => {
+  return {
     type: ADD_TASK,
     payload: {
-      task: newTask
+      id: uuidv4(),
+      label,
+      description,
+      completed: false
     }
+  };
+};
+
+export const removeTask = id => ({
+  type: REMOVE_TASK,
+  payload: {
+    id
+  }
 });
 
-export const removeTask = (id) => ({
-    type: REMOVE_TASK,
-    payload: {
-      id
-    }
-});
-
-export const toggleTask = (id) => ({
-    type: TOGGLE_TASK_COMPLETE_STATE,
-    payload: {
-      id
-    }
+export const toggleTask = id => ({
+  type: TOGGLE_TASK_COMPLETE_STATE,
+  payload: {
+    id
+  }
 });

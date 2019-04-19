@@ -5,16 +5,17 @@ import Task from "./Task";
 function TaskList(props) {
   return (
     <div>
-      {props.tasks.map(task => {
-        const { id, label, description } = task;
+      {Object.keys(props.tasks).map(id => {
+        const { label, description, completed } = props.tasks[id];
         return (
           <Task
             key={id}
             id={id}
             label={label}
             description={description}
-            handleRemove={props.handleRemove.bind(id)}
-            handleStateChange={props.handleStateChange.bind(id)}
+            completed={completed}
+            handleRemove={props.handleRemove.bind(null, id)}
+            handleToggle={props.handleToggle.bind(null, id)}
           />
         );
       })}
@@ -23,9 +24,9 @@ function TaskList(props) {
 }
 
 TaskList.propTypes = {
-  tasks: PropTypes.array.isRequired,
+  tasks: PropTypes.object.isRequired,
   handleRemove: PropTypes.func.isRequired,
-  handleStateChange: PropTypes.func.isRequired
+  handleToggle: PropTypes.func.isRequired
 };
 
 export default TaskList;

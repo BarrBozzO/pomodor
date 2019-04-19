@@ -7,7 +7,7 @@ function Task(props) {
       <div>{props.label}</div>
       <div>{props.description}</div>
       <div>
-        <button onClick={props.handleStateChange}>toggle</button>
+        <button onClick={props.handleToggle}>toggle</button>
         <button onClick={props.handleRemove}>remove</button>
       </div>
     </div>
@@ -15,11 +15,12 @@ function Task(props) {
 }
 
 Task.propTypes = {
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
+  completed: PropTypes.bool.isRequired,
   handleRemove: PropTypes.func.isRequired,
-  handleStateChange: PropTypes.func.isRequired
+  handleToggle: PropTypes.func.isRequired
 };
 
 export default Task;

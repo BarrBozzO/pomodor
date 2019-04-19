@@ -11,6 +11,7 @@ class TaskForm extends Component {
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(e) {
@@ -23,7 +24,7 @@ class TaskForm extends Component {
     const { label, description } = this.state;
 
     if (label !== "" && description !== "") {
-      this.props.handleTaskCreation({
+      this.props.handleAdd({
         label,
         description
       });
@@ -35,12 +36,13 @@ class TaskForm extends Component {
   }
 
   render() {
+    const { label, description } = this.state;
     return (
-      <form onSubmit={this.props.handleSubmit}>
+      <form onSubmit={this.handleSubmit}>
         <div>
           <input
             name="label"
-            value={this.state.label}
+            value={label}
             placeholder="Название"
             onChange={this.handleChange}
           />
@@ -48,19 +50,25 @@ class TaskForm extends Component {
         <div>
           <input
             name="description"
-            value={this.state.description}
+            value={description}
             placeholder="Описание"
             onChange={this.handleChange}
           />
         </div>
-        <div />
+        <div>
+          <input
+            disabled={label === "" || description === ""}
+            type="submit"
+            value="+"
+          />
+        </div>
       </form>
     );
   }
 }
 
 TaskForm.propTypes = {
-  handleTaskCreation: PropTypes.func.isRequired
+  handleAdd: PropTypes.func.isRequired
 };
 
 export default TaskForm;
