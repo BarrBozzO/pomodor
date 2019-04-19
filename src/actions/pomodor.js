@@ -1,39 +1,42 @@
-import { START_TIMER, PAUSE_TIMER, RESET_TIMER, TICK_TIMER } from "./types";
+import {
+  START_TIMER,
+  PAUSE_TIMER,
+  SET_TIMER,
+  STOP_TIMER,
+  CHANGE_SETTINGS
+} from "./types";
 
-let timerInterval = null;
-
-const startTimer = () => {
-  return {
+export const startTimer = () => ({
     type: START_TIMER,
     payload: {
-      paused: false
+      started: new Date().getTime()
     }
-  };
-};
+});
 
-const pauseTimer = () => {
-  return {
+export const pauseTimer = () => ({
     type: PAUSE_TIMER,
     payload: {
-      paused: true
+      paused: new Date().getTime()
     }
-  };
-};
+});
 
-const tickTimer = () => {
-  return {
-    type: TICK_TIMER
-  };
-};
+export const stopTimer = () => ({
+    type: STOP_TIMER,
+    payload: {
+      stopped: new Date().getTime()
+    }
+});
 
-export const handleStartTimer = () => dispatch => {
-  timerInterval = setInterval(() => {
-    console.log("increment timer");
-    dispatch(tickTimer());
-  }, 1000);
-};
+export const setTimer = (remains) => ({
+    type: SET_TIMER,
+    payload: {
+      remains
+    }
+});
 
-export const handlePauseTimer = () => {
-  clearInterval(timerInterval);
-  return pauseTimer();
-};
+export const changeSettings = (newSettings) => ({
+  type: CHANGE_SETTINGS,
+  payload: {
+    ...newSettings
+  }
+});

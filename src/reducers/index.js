@@ -1,7 +1,9 @@
 import { combineReducers } from "redux";
 
-import pomodor from "./pomodor";
+import pomodorTimer from "./pomodorTimer";
+import pomodorSettings from "./pomodorSettings";
 
 export default combineReducers({
-  pomodor
+  pomodorTimer,
+  pomodorSettings
 });
