@@ -3,12 +3,14 @@ import PropTypes from "prop-types";
 import Display from "./PomodorTimerDisplay";
 import Controls from "./PomodorTimerControls";
 
+import {calculateInitialRemain} from '../../utils/timer';
+
 class PomodorTimer extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      time: props.timer.remains,
+      time: calculateInitialRemain(props.timer),
       remains: props.timer.remains
     };
     this.interval = null;
@@ -51,8 +53,8 @@ class PomodorTimer extends Component {
     this.setState(prevState => {
       let nextTime = prevState.time - this.period;
       if (nextTime <= 0) {
-        this.props.handleStop();
-        return prevState;
+        clearInterval(this.interval);
+        return this.props.handleStop(); // stop timer
       } else {
         return {
           ...prevState,
@@ -67,10 +69,12 @@ class PomodorTimer extends Component {
       <div>
         <Display time={this.state.time} />
         <Controls
+          settings={this.props.settings}
           timerState={this.props.timer.state}
           handleStart={this.props.handleStart}
           handlePause={this.props.handlePause}
           handleStop={this.props.handleStop}
+          handleSet={this.props.handleSet}
         />
       </div>
     );
@@ -79,9 +83,11 @@ class PomodorTimer extends Component {
 
 PomodorTimer.propTypes = {
   timer: PropTypes.object.isRequired,
+  settings: PropTypes.object.isRequired,
   handleStart: PropTypes.func.isRequired,
   handlePause: PropTypes.func.isRequired,
-  handleStop: PropTypes.func.isRequired
+  handleStop: PropTypes.func.isRequired,
+  handleSet: PropTypes.func.isRequired
 };
 
 export default PomodorTimer;
