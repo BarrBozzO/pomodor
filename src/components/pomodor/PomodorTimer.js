@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Display from "./PomodorTimerDisplay";
 import Controls from "./PomodorTimerControls";
 
-import {calculateInitialRemain} from '../../utils/timer';
+import { calculateInitialRemain } from "../../utils/timer";
 
 class PomodorTimer extends Component {
   constructor(props) {
@@ -71,6 +71,7 @@ class PomodorTimer extends Component {
         <Controls
           settings={this.props.settings}
           timerState={this.props.timer.state}
+          timerRemains={this.state.remains}
           handleStart={this.props.handleStart}
           handlePause={this.props.handlePause}
           handleStop={this.props.handleStop}

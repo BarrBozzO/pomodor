@@ -1,32 +1,52 @@
 import React from "react";
 import PropTypes from "prop-types";
+import styled from "styled-components";
 
-import Button from '../common/Button';
+import Button from "../common/Button";
+
+const ButtonsContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin 15px 0;
+`;
 
 function PomodorTimerControls(props) {
-  const handleSet = (type) => {
+  const handleSet = type => {
     let newRemain = props.settings[type];
     return () => props.handleSet(newRemain);
   };
 
   return (
     <div>
-      <div>
+      <ButtonsContainer>
         <Button
-          handleClick={props.timerState === "started" ? props.handlePause : props.handleStart}
-          value={props.timerState === "stopped" ? "START" : props.timerState === "paused" ? "RESUME" : "PAUSE"}
-          />
+          handleClick={
+            props.timerState === "started"
+              ? props.handlePause
+              : props.handleStart
+          }
+          value={
+            props.timerState === "stopped"
+              ? "СТАРТ"
+              : props.timerState === "paused"
+              ? "ПРОДОЛЖИТЬ"
+              : "ПАУЗА"
+          }
+          primary={true}
+          disabled={props.timerState === "stopped" && props.timerRemains <= 0}
+        />
         <Button
           handleClick={props.handleStop}
           disabled={props.timerState === "stopped"}
-          value="STOP"
-          />
-      </div>
-      <div>
-        <Button handleClick={handleSet('pomodoro')} value="Pomodoro" />
-        <Button handleClick={handleSet('long')} value="Long Break" />
-        <Button handleClick={handleSet('short')} value="Short Break" />
-      </div>
+          value="СТОП"
+          primary={true}
+        />
+      </ButtonsContainer>
+      <ButtonsContainer>
+        <Button handleClick={handleSet("pomodoro")} value="Pomodor" />
+        <Button handleClick={handleSet("long")} value="Отдых" />
+        <Button handleClick={handleSet("short")} value="Перерыв" />
+      </ButtonsContainer>
     </div>
   );
 }
@@ -34,6 +54,7 @@ function PomodorTimerControls(props) {
 PomodorTimerControls.propTypes = {
   settings: PropTypes.object.isRequired,
   timerState: PropTypes.string.isRequired,
+  timerRemains: PropTypes.number.isRequired,
   handleStart: PropTypes.func.isRequired,
   handlePause: PropTypes.func.isRequired,
   handleStop: PropTypes.func.isRequired,

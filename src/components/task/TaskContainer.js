@@ -1,22 +1,39 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import styled from "styled-components";
 
 import { addTask, removeTask, toggleTask } from "../../actions/tasks";
 
 import TaskForm from "./TaskForm";
 import TaskList from "./TaskList";
 
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  position: relative;
+  transition: width 400ms linear;
+  background-color: #fff;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  @media (max-width: 550px) {
+    width: 100%;
+  }
+`;
+
 class TaskContainer extends Component {
   render() {
     return (
-      <div>
+      <Container>
         <TaskForm handleAdd={this.props.addTask} />
         <TaskList
           tasks={this.props.tasks}
           handleRemove={this.props.removeTask}
           handleToggle={this.props.toggleTask}
         />
-      </div>
+      </Container>
     );
   }
 }

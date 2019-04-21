@@ -2,7 +2,12 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import Pomodor from "./Pomodor";
-import { startTimer, pauseTimer, stopTimer, setTimer } from "../../actions/pomodor";
+import {
+  startTimer,
+  pauseTimer,
+  stopTimer,
+  setTimer
+} from "../../actions/pomodor";
 
 class PomodorContainer extends Component {
   render() {

@@ -1,6 +1,44 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import styled from "styled-components";
 
+import Button from "../common/Button";
+import Input from "../common/Input";
+
+const StyledForm = styled.form`
+  display: flex;
+  flex-flow; row nowrap;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  & input,
+  & button {
+    width: 100%;
+  }
+  & > div {
+    flex: 1 0 auto;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  & > div:first-child {
+    padding-left: 0;
+  }
+  & > div:last-child {
+    padding-right: 0;
+  }
+  @media (max-width: 550px) {
+    flex-flow: column;
+    & > div {
+      display:block;
+      width: 100%;
+      padding: 0;
+    }
+    & input,
+    & button {
+      margin-top: 15px;
+    }
+  }
+`;
 class TaskForm extends Component {
   constructor(props) {
     super(props);
@@ -38,31 +76,34 @@ class TaskForm extends Component {
   render() {
     const { label, description } = this.state;
     return (
-      <form onSubmit={this.handleSubmit}>
+      <StyledForm onSubmit={this.handleSubmit}>
         <div>
-          <input
+          <Input
             name="label"
+            type="text"
             value={label}
             placeholder="Название"
-            onChange={this.handleChange}
+            handleChange={this.handleChange}
           />
         </div>
         <div>
-          <input
+          <Input
             name="description"
+            type="text"
             value={description}
             placeholder="Описание"
-            onChange={this.handleChange}
+            handleChange={this.handleChange}
           />
         </div>
         <div>
-          <input
+          <Button
+            type={"submit"}
             disabled={label === "" || description === ""}
-            type="submit"
-            value="+"
+            value="Добавить"
+            primary={true}
           />
         </div>
-      </form>
+      </StyledForm>
     );
   }
 }
