@@ -1,13 +1,15 @@
-import React from 'react';
+import React from "react";
 
-import TaskContainer from './task/TaskContainer';
-import PomodorContainer from './pomodor/PomodorContainer';
+import Header from "./Header";
+import TaskContainer from "./task/TaskContainer";
+import PomodorContainer from "./pomodor/PomodorContainer";
 
-function Main () {
+function Main() {
   return (
     <div>
-    <PomodorContainer />
-    <TaskContainer />
+      <Header />
+      <PomodorContainer />
+      <TaskContainer />
     </div>
   );
 }

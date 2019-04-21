@@ -34,8 +34,8 @@ const StyledCheckBox = styled.input.attrs({
   }
 
   &:checked + label::before {
-    background: #c90904;
-    border-color: #c90904;
+    background: #f44336;
+    border-color: #f44336;
   }
 
   &:disabled + label {

@@ -4,14 +4,14 @@ import styled from "styled-components";
 
 const StyledButton = styled.button`
   box-sizing: border-box;
-  border: 1px solid #c90904;
+  border: 1px solid #f44336;
   border-radius: 20px;
-  background: ${({ primary }) => (primary ? "#C90904" : "#ffffff")};
+  background: ${({ primary }) => (primary ? "#f44336" : "#ffffff")};
   font-size: 16px;
   line-height: normal;
   padding: 10px 16px;
   margin: 0;
-  color: ${({ primary }) => (primary ? "#ffffff" : "#C90904")};
+  color: ${({ primary }) => (primary ? "#ffffff" : "#f44336")};
   cursor: pointer;
   font-weight: 600;
 
