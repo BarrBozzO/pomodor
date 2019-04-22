@@ -1,8 +1,10 @@
 import {
+  INIT_TIMER,
   START_TIMER,
   PAUSE_TIMER,
   SET_TIMER,
   STOP_TIMER,
+  TICK_TIMER,
   CHANGE_SETTINGS
 } from "./types";
 
@@ -34,9 +36,17 @@ export const setTimer = (remains) => ({
     }
 });
 
+export const tickTimer = () => ({
+    type: TICK_TIMER
+});
+
 export const changeSettings = (newSettings) => ({
   type: CHANGE_SETTINGS,
   payload: {
     ...newSettings
   }
+});
+
+export const initTimer = () => ({
+    type: INIT_TIMER
 });

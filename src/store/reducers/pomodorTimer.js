@@ -14,6 +14,7 @@ const initialState = {
     paused: 0,
     state: "stopped" // started, paused, stopped
 };
+const intervalPeriod = 1000;
 
 const pomodorTimerReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -53,6 +54,10 @@ const pomodorTimerReducer = (state = initialState, action) => {
         state: "stopped"
       };
     case TICK_TIMER:
+      return {
+        ...state,
+        remains: state.remains - intervalPeriod
+      };
     default:
       return state;
   }
