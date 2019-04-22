@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 
-import { addTask, removeTask, toggleTask } from "../../actions/tasks";
+import { addTask, removeTask, toggleTask } from "../../store/actions/tasks";
 
 import TaskForm from "./TaskForm";
 import TaskList from "./TaskList";

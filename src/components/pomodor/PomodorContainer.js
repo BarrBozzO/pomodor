@@ -7,7 +7,7 @@ import {
   pauseTimer,
   stopTimer,
   setTimer
-} from "../../actions/pomodor";
+} from "../../store/actions/pomodor";
 
 class PomodorContainer extends Component {
   render() {

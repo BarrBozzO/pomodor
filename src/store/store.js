@@ -3,7 +3,7 @@ import reduxThunk from "redux-thunk";
 import logger from 'redux-logger';
 import throttle from 'lodash/throttle';
 import rootReducer from "./reducers/index";
-import {loadState, saveState} from './utils/localStorage';
+import {loadState, saveState} from '../utils/localStorage';
 
 const persistedState = loadState();
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
