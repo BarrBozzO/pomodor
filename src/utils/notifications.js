@@ -1,5 +1,6 @@
+import tomatoIcon from '../assets/png/tomato.png';
 
-export const requestNotifyPermission = (cb) => {
+export const requestNotifyPermission = () => {
     try {
       return Notification.requestPermission().then(function(result) {
         return result;
@@ -9,7 +10,7 @@ export const requestNotifyPermission = (cb) => {
     }
 };
 
-export const getNotifyPermission = () => {
+export const getCurrentNotifyPermission = () => {
     // Possible values = default, granted, denied
     try {
       return Notification.permission;
@@ -17,3 +18,11 @@ export const getNotifyPermission = () => {
       return 'denied';
     }
 };
+
+export const createNotify = (title, body)  => {
+  var options = {
+      body: body,
+      icon: tomatoIcon
+  };
+  return new Notification(title, options);
+}
