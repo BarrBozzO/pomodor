@@ -20,9 +20,15 @@ export const getCurrentNotifyPermission = () => {
 };
 
 export const createNotify = (title, body)  => {
-  var options = {
-      body: body,
-      icon: tomatoIcon
-  };
-  return new Notification(title, options);
+  try {
+    if (getCurrentNotifyPermission() === 'granted') {
+      var options = {
+          body: body,
+          icon: tomatoIcon
+      };
+      return new Notification(title, options);  
+    }
+  } catch(err) {
+    console.warn('NotificationsAPI error: ' + err);
+  }
 }
