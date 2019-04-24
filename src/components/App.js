@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { connect } from "react-redux";
 import { createGlobalStyle } from "styled-components";
+
+import { initPomodor } from "../store/actions/pomodor";
 
 import Main from "./Main";
 import NotFound from "./NotFound";
@@ -24,6 +27,9 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 class App extends Component {
+  componentDidMount() {
+    this.props.initPomodor();
+  }
   render() {
     return (
       <Router>
@@ -39,4 +45,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect(null, {initPomodor})(App);

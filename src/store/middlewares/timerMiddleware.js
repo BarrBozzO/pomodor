@@ -1,7 +1,8 @@
-import { INIT_TIMER, START_TIMER, PAUSE_TIMER, STOP_TIMER, SET_TIMER } from '../actions/types';
+import { INIT_POMODOR, START_TIMER, PAUSE_TIMER, STOP_TIMER, SET_TIMER } from '../actions/types';
 import { startTimer, tickTimer, stopTimer, setTimer } from '../actions/pomodor';
 
-import {calculateInitialRemain} from '../../utils/timer';
+import { calculateInitialRemain } from '../../utils/timer';
+import { createNotify } from '../../utils/notifications';
 
 const timerMiddleware = ({dispatch, getState}) => {
   let intervalId = null,
@@ -12,12 +13,15 @@ const timerMiddleware = ({dispatch, getState}) => {
 
     const { remains } = getState().pomodorTimer;
     if (remains > 0) dispatch(tickTimer());
-    else dispatch(stopTimer());
+    else {
+      dispatch(stopTimer());
+      createNotify('Finished', 'Period finished. What next?');
+    }
   };
 
   return next => action => {
     switch (action.type) {
-      case INIT_TIMER:
+      case INIT_POMODOR:
         const timer = getState().pomodorTimer;
 
         if (intervalId === null && timer.state === 'started') {

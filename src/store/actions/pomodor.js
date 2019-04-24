@@ -1,5 +1,5 @@
 import {
-  INIT_TIMER,
+  INIT_POMODOR,
   START_TIMER,
   PAUSE_TIMER,
   SET_TIMER,
@@ -7,6 +7,8 @@ import {
   TICK_TIMER,
   CHANGE_SETTINGS
 } from "./types";
+
+import { getCurrentNotifyPermission, requestNotifyPermission } from "../../utils/notifications";
 
 export const startTimer = () => ({
     type: START_TIMER,
@@ -47,6 +49,26 @@ export const changeSettings = (newSettings) => ({
   }
 });
 
-export const initTimer = () => ({
-    type: INIT_TIMER
-});
+export const initPomodor = () => (dispatch) => {
+  dispatch({
+    type: INIT_POMODOR
+  });
+  const permission = getCurrentNotifyPermission();
+  if (permission !== 'default') {
+    dispatch(changeSettings({notifyAllowed: permission === 'granted'}));
+  }
+  else {
+    requestNotifyPermission()
+      .then(newPermission => {
+        return dispatch(changeSettings({
+          notifyAllowed: newPermission === 'granted'
+        }));
+      })
+      .catch(err => {
+        console.warn('NotificationsAPI');
+        return dispatch(changeSettings({
+          notifyAllowed: false
+        }));
+      });
+  }
+};

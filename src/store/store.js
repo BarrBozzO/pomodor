@@ -4,7 +4,6 @@ import logger from "redux-logger";
 import throttle from "lodash/throttle";
 import rootReducer from "./reducers/index";
 import timerMiddleware from "./middlewares/timerMiddleware";
-import { initTimer } from "./actions/pomodor";
 import { loadState, saveState } from "../utils/localStorage";
 
 const persistedState = loadState();
@@ -20,7 +19,5 @@ store.subscribe(
     saveState(store.getState());
   }, 1000)
 );
-
-store.dispatch(initTimer());
 
 export default store;
