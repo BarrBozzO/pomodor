@@ -7,12 +7,12 @@ import {
 } from "../actions/types";
 
 const initialState = {
-    expire: 0,
-    remains: 1500000,
-    started: 0,
-    stopped: 0, // ?
-    paused: 0,
-    state: "stopped" // started, paused, stopped
+  expire: 0,
+  remains: 1500000,
+  started: 0,
+  stopped: 0, // ?
+  paused: 0,
+  state: "stopped" // started, paused, stopped
 };
 const intervalPeriod = 1000;
 
@@ -21,16 +21,16 @@ const pomodorTimerReducer = (state = initialState, action) => {
     case START_TIMER:
       const { started } = action.payload;
       return {
-          ...state,
-          started,
-          expire: started + state.remains,
-          state: "started"
+        ...state,
+        started,
+        expire: started + state.remains,
+        state: "started"
       };
     case PAUSE_TIMER:
       const { paused } = action.payload;
       return {
         ...state,
-        remains: state.remains - (paused - state.started),
+        // remains: state.remains - (paused - state.started),
         paused,
         state: "paused"
       };
@@ -43,7 +43,7 @@ const pomodorTimerReducer = (state = initialState, action) => {
         state: "stopped"
       };
     case SET_TIMER:
-      const {remains} = action.payload;
+      const { remains } = action.payload;
       return {
         ...state,
         remains,

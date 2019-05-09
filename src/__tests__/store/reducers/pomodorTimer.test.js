@@ -8,7 +8,7 @@ import {
 } from "../../../store/actions/types";
 
 describe("PomodorTimer reducer", () => {
-  it('should return the initial state', () => {
+  it("should return the initial state", () => {
     const expectedInitialState = {
       expire: 0,
       remains: 1500000,
@@ -23,11 +23,11 @@ describe("PomodorTimer reducer", () => {
     expect(reducedInitialState).toEqual(expectedInitialState);
   });
 
-  it('should handle START_TIMER', () => {
+  it("should handle START_TIMER", () => {
     const startTimerAction = {
-      type: START_TIMER,
-      payload: {
-        started: 1558815615,
+        type: START_TIMER,
+        payload: {
+          started: 1558815615
         }
       },
       initialState = {
@@ -49,11 +49,11 @@ describe("PomodorTimer reducer", () => {
     expect(reducedState).toMatchObject(expectedState);
   });
 
-  it('should handle STOP_TIMER', () => {
+  it("should handle STOP_TIMER", () => {
     const stopTimerAction = {
-      type: STOP_TIMER,
-      payload: {
-        stopped: 1557315615,
+        type: STOP_TIMER,
+        payload: {
+          stopped: 1557315615
         }
       },
       expectedState = {
@@ -67,11 +67,11 @@ describe("PomodorTimer reducer", () => {
     expect(reducedState).toMatchObject(expectedState);
   });
 
-  it('should handle PAUSE_TIMER', () => {
+  it("should handle PAUSE_TIMER", () => {
     const pauseTimerAction = {
-      type: PAUSE_TIMER,
-      payload: {
-        paused: 1557435615,
+        type: PAUSE_TIMER,
+        payload: {
+          paused: 1557435615
         }
       },
       initialState = {
@@ -84,7 +84,6 @@ describe("PomodorTimer reducer", () => {
       },
       expectedState = {
         paused: 1557435615,
-        remains: 1380000,
         state: "paused"
       };
 
@@ -93,11 +92,11 @@ describe("PomodorTimer reducer", () => {
     expect(reducedState).toMatchObject(expectedState);
   });
 
-  it('should handle SET_TIMER', () => {
+  it("should handle SET_TIMER", () => {
     const setTimerAction = {
-      type: SET_TIMER,
-      payload: {
-        remains: 900000,
+        type: SET_TIMER,
+        payload: {
+          remains: 900000
         }
       },
       expectedState = {
@@ -114,9 +113,9 @@ describe("PomodorTimer reducer", () => {
     expect(reducedState).toEqual(expectedState);
   });
 
-  it('should handle TICK_TIMER', () => {
+  it("should handle TICK_TIMER", () => {
     const tickTimerAction = {
-        type: TICK_TIMER,
+        type: TICK_TIMER
       },
       initialState = {
         remains: 2000,
