@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render Button component correctly 1`] = `
+<div
+  className="sc-bdVaJa bFnqau"
+>
+  <input
+    checked={false}
+    className="sc-bwzfXH iqDort"
+    disabled={true}
+    id="testId"
+    name="testName"
+    onChange={[MockFunction]}
+    type="checkbox"
+  />
+  <label
+    htmlFor="testId"
+  />
+</div>
+`;
