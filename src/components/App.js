@@ -24,6 +24,7 @@ const GlobalStyle = createGlobalStyle`
   * {
     box-sizing: border-box;
   }
+  textarea, select, input, button { outline: none; }
 `;
 
 class App extends Component {
@@ -45,4 +46,7 @@ class App extends Component {
   }
 }
 
-export default connect(null, {initPomodor})(App);
+export default connect(
+  null,
+  { initPomodor }
+)(App);

@@ -7,9 +7,9 @@ const StyledButton = styled.button`
   border: 1px solid #f44336;
   border-radius: 20px;
   background: ${({ primary }) => (primary ? "#f44336" : "#ffffff")};
-  font-size: 16px;
+  font-size: ${({ small }) => (small ? "14px" : "16px")};
   line-height: normal;
-  padding: 10px 16px;
+  padding: ${({ small }) => (small ? "8px 14px" : "10px 16px")};
   margin: 0;
   color: ${({ primary }) => (primary ? "#ffffff" : "#f44336")};
   cursor: pointer;
@@ -34,6 +34,8 @@ function Button(props) {
       onClick={props.handleClick}
       disabled={props.disabled}
       primary={props.primary}
+      small={props.small}
+      className={props.className}
     >
       {props.value}
     </StyledButton>
@@ -42,15 +44,18 @@ function Button(props) {
 
 Button.propTypes = {
   handleClick: PropTypes.func,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   disabled: PropTypes.bool,
   primary: PropTypes.bool,
-  type: PropTypes.string
+  small: PropTypes.bool,
+  type: PropTypes.string,
+  className: PropTypes.string
 };
 
 Button.defaultProps = {
   disabled: false,
   primary: false,
+  small: false,
   type: "button"
 };
 
