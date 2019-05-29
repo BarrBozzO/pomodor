@@ -6,7 +6,8 @@ import {
   startTimer,
   pauseTimer,
   stopTimer,
-  setTimer
+  setTimer,
+  changeSettings
 } from "../../store/actions/pomodor";
 
 class PomodorContainer extends Component {
@@ -20,6 +21,7 @@ class PomodorContainer extends Component {
           handlePauseTimer={this.props.pauseTimer}
           handleStopTimer={this.props.stopTimer}
           handleSetTimer={this.props.setTimer}
+          handleChangeSettings={this.props.changeSettings}
         />
       </div>
     );
@@ -35,5 +37,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { startTimer, pauseTimer, stopTimer, setTimer }
+  { startTimer, pauseTimer, stopTimer, setTimer, changeSettings }
 )(PomodorContainer);
