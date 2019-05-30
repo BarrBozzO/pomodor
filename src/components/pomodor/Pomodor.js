@@ -11,6 +11,7 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: auto;
   padding: 15px;
   position: relative;
   background-color: #fff;
@@ -19,6 +20,7 @@ const Container = styled.div`
   margin-bottom: 15px;
   @media (max-width: 550px) {
     width: 100%;
+    padding-top: 30px;
   }
 
   & > .pomodor__timer-display-enter {
@@ -53,11 +55,26 @@ const Container = styled.div`
 `;
 
 const SwitchModeBtn = styled.button`
+  display: inline-block;
   position: absolute;
   top: 0;
   right: 0;
-  width: 100px;
-  height: 20px;
+  width: auto;
+  height: 30px;
+  padding: 0 10px;
+  background: transparent;
+  border: none;
+  font-size: 14px;
+  text-transform: uppercase;
+  color: #999;
+  cursor: pointer;
+  transition: all 250ms;
+  transition-property: background, color;
+
+  &:hover {
+    color: #666;
+    background: #efefef;
+  }
 `;
 
 class Pomodor extends Component {
@@ -91,8 +108,7 @@ class Pomodor extends Component {
       { showSettings, showTimer } = this.state,
       handleSwitchModeClick = showTimer
         ? () => this.setShowTimer(false)
-        : () => this.setShowSettings(false),
-      switchModeLabel = showTimer ? "настройки" : "таймер";
+        : () => this.setShowSettings(false);
 
     return (
       <Container>
@@ -130,7 +146,7 @@ class Pomodor extends Component {
           disabled={showSettings === showTimer}
           onClick={handleSwitchModeClick.bind(this)}
         >
-          {switchModeLabel}
+          {showTimer ? <span>настройки</span> : <span>таймер</span>}
         </SwitchModeBtn>
       </Container>
     );

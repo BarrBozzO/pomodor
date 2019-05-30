@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
+import { convertToMinutes, convertToMs } from "../../utils/timer";
+
 import Button from "../common/Button";
 import Input from "../common/Input";
 import CheckBox from "../common/CheckBox";
@@ -9,10 +11,44 @@ import CheckBox from "../common/CheckBox";
 const StyledForm = styled.form`
   display: flex;
   flex-flow: column nowrap;
+  width: 450px;
 
-  & > div {
-    flex: item;
+  @media (max-width: 550px) {
+    width: 100%;
   }
+
+  > div {
+    flex: 1 0 100%;
+    display: flex;
+    flex-flow: row nowrap;
+
+    &:not(:first-child) {
+      margin-top: 8px;
+    }
+  }
+`;
+
+const StyledFormHeader = styled.div`
+  font-size: 20px;
+  font-weight: 600;
+  line-height: normal;
+  margin-bottom: 8px;
+`;
+
+const StyledFormFieldLabel = styled.span`
+  flex: 1 0 auto;
+  align-self: center;
+`;
+
+const StyledFormFieldInput = styled(Input)`
+  flex: 0 0 50%;
+  width: 0;
+`;
+
+const StyledFormFieldCheckbox = styled(CheckBox)`
+  flex: 0 0 50%;
+  padding: 11px 0 8px;
+  text-align: right;
 `;
 
 class PomodorSettings extends Component {
@@ -28,7 +64,7 @@ class PomodorSettings extends Component {
   }
 
   handleChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
+    this.setState({ [e.target.name]: convertToMs(e.target.value) });
   }
 
   handleSubmit(e) {
@@ -36,45 +72,56 @@ class PomodorSettings extends Component {
 
     const { long, short, pomodoro, notifyAllowed } = this.state;
     this.props.handleChangeSettings({
-      long,
-      short,
-      pomodoro,
+      long: long,
+      short: short,
+      pomodoro: pomodoro,
       notifyAllowed
     });
   }
 
   render() {
     const { long, short, pomodoro, notifyAllowed } = this.state,
-      changeDisabled = false;
+      changeAllowed =
+        long !== this.props.settings.long ||
+        short !== this.props.settings.short ||
+        pomodoro !== this.props.settings.pomodoro;
+
     return (
-      <StyledForm handleSubmit={this.handleSubmit}>
-        <div>Настройки</div>
+      <StyledForm onSubmit={this.handleSubmit}>
+        <StyledFormHeader>Настройки</StyledFormHeader>
         <div>
-          <Input
+          <StyledFormFieldLabel>{"Перерыв"}</StyledFormFieldLabel>
+          <StyledFormFieldInput
             name="long"
             type="number"
-            value={long}
+            step={1}
+            value={convertToMinutes(long)}
             handleChange={this.handleChange}
           />
         </div>
         <div>
-          <Input
+          <StyledFormFieldLabel>{"Пауза"}</StyledFormFieldLabel>
+          <StyledFormFieldInput
             name="short"
             type="number"
-            value={short}
+            step={1}
+            value={convertToMinutes(short)}
             handleChange={this.handleChange}
           />
         </div>
         <div>
-          <Input
+          <StyledFormFieldLabel>{"Помодор"}</StyledFormFieldLabel>
+          <StyledFormFieldInput
             name="pomodoro"
             type="number"
-            value={pomodoro}
+            step={1}
+            value={convertToMinutes(pomodoro)}
             handleChange={this.handleChange}
           />
         </div>
         <div>
-          <CheckBox
+          <StyledFormFieldLabel>{"Уведомления"}</StyledFormFieldLabel>
+          <StyledFormFieldCheckbox
             name="notifyAllowed"
             id="notifyAllowed"
             checked={notifyAllowed}
@@ -85,9 +132,8 @@ class PomodorSettings extends Component {
         <div>
           <Button
             type={"submit"}
-            disabled={changeDisabled}
+            disabled={!changeAllowed}
             value="Изменить"
-            handleChange={this.handleChange}
             primary={true}
           />
         </div>

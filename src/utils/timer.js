@@ -5,7 +5,19 @@ export const convertToDisplay = (ms = 0) => {
   return `${minutes}:${seconds}`;
 };
 
-export const calculateInitialRemain = ({remains, started, state, expire}) => {
+export const calculateInitialRemain = ({ remains, started, state, expire }) => {
   const now = new Date().getTime();
-  return (state === 'started') ? (now > expire ? 0 : remains - (now - started)) : remains;
+  return state === "started"
+    ? now > expire
+      ? 0
+      : remains - (now - started)
+    : remains;
+};
+
+export const convertToMinutes = (ms = 0) => {
+  return ms / (1000 * 60);
+};
+
+export const convertToMs = (minutes = 0) => {
+  return minutes * (1000 * 60);
 };
