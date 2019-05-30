@@ -9,7 +9,6 @@ exports[`should render Button component correctly 1`] = `
     className="sc-bwzfXH iqDort"
     disabled={true}
     id="testId"
-    name="testName"
     onChange={[MockFunction]}
     type="checkbox"
   />

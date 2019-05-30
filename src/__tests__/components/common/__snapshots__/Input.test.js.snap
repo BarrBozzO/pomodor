@@ -1,17 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders correctly when all props are passed 1`] = `
-<input
-  className="sc-bdVaJa jOMGgo"
-  disabled={true}
-  name="testInput"
-  onChange={[MockFunction]}
-  placeholder="test placeholder"
-  type="password"
-  value="test"
-/>
-`;
-
 exports[`should render Input component correctly when all props are passed 1`] = `
 <input
   className="sc-bdVaJa jOMGgo"

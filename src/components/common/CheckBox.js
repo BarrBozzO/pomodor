@@ -65,12 +65,12 @@ const StyledCheckBox = styled.input.attrs({
 function CheckBox(props) {
   const { checked, handleChange, id } = props;
   return (
-    <CheckBoxContainer>
+    <CheckBoxContainer className={props.className}>
       <StyledCheckBox
         id={id}
         checked={checked}
         onChange={handleChange}
-        {...props}
+        disabled={props.disabled}
       />
       <label htmlFor={id} />
     </CheckBoxContainer>
@@ -82,7 +82,8 @@ CheckBox.propTypes = {
   checked: PropTypes.bool,
   disabled: PropTypes.bool,
   name: PropTypes.string.isRequired,
-  handleChange: PropTypes.func
+  handleChange: PropTypes.func,
+  className: PropTypes.string
 };
 
 CheckBox.defaultProps = {

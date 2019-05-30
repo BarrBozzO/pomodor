@@ -11,7 +11,16 @@ const StyledInput = styled.input`
 `;
 
 function Input(props) {
-  const { name, disabled, value, type, placeholder, handleChange } = props;
+  const {
+    name,
+    disabled,
+    value,
+    type,
+    placeholder,
+    handleChange,
+    className,
+    step
+  } = props;
   return (
     <StyledInput
       name={name}
@@ -20,6 +29,8 @@ function Input(props) {
       value={value}
       placeholder={placeholder}
       onChange={handleChange}
+      className={className}
+      step={step}
     />
   );
 }
@@ -30,7 +41,9 @@ Input.propTypes = {
   type: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   handleChange: PropTypes.func.isRequired,
-  placeholder: PropTypes.string
+  placeholder: PropTypes.string,
+  className: PropTypes.string,
+  step: PropTypes.number
 };
 
 Input.defaultProps = {
