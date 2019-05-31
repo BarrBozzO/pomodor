@@ -7,7 +7,7 @@ Demo - [pomodor-application.web.app](https://pomodor-application.web.app/)
 #### Features:
 - [x] Tasks - create/complete/remove
 - [x] Timer - pomodor/long break/short break
-- [ ] Settings
+- [x] Settings
 - [ ] Account Registration
 
 #### Instructions:
