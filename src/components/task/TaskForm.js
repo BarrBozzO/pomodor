@@ -1,7 +1,8 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
+import useForm from "../hooks/useForm";
 import Button from "../common/Button";
 import Input from "../common/Input";
 
@@ -39,73 +40,56 @@ const StyledForm = styled.form`
     }
   }
 `;
-class TaskForm extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      label: "",
-      description: ""
-    };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
-  }
-
-  handleSubmit(e) {
-    e.preventDefault();
-
-    const { label, description } = this.state;
+function TaskForm(props) {
+  const submit = (task, setTask) => {
+    const { label, description } = task;
 
     if (label !== "" && description !== "") {
-      this.props.handleAdd({
+      props.handleAdd({
         label,
         description
       });
-      this.setState({
+      setTask({
         label: "",
         description: ""
       });
     }
-  }
+  };
 
-  render() {
-    const { label, description } = this.state;
-    return (
-      <StyledForm onSubmit={this.handleSubmit}>
-        <div>
-          <Input
-            name="label"
-            type="text"
-            value={label}
-            placeholder="Название"
-            handleChange={this.handleChange}
-          />
-        </div>
-        <div>
-          <Input
-            name="description"
-            type="text"
-            value={description}
-            placeholder="Описание"
-            handleChange={this.handleChange}
-          />
-        </div>
-        <div>
-          <Button
-            type={"submit"}
-            disabled={label === "" || description === ""}
-            value="Добавить"
-            primary={true}
-          />
-        </div>
-      </StyledForm>
-    );
-  }
+  const { inputs, handleSubmit, handleChange } = useForm({
+    submit
+  });
+
+  return (
+    <StyledForm onSubmit={handleSubmit}>
+      <div>
+        <Input
+          name="label"
+          type="text"
+          value={inputs.label || ""}
+          placeholder="Название"
+          handleChange={handleChange}
+        />
+      </div>
+      <div>
+        <Input
+          name="description"
+          type="text"
+          value={inputs.description || ""}
+          placeholder="Описание"
+          handleChange={handleChange}
+        />
+      </div>
+      <div>
+        <Button
+          type={"submit"}
+          disabled={inputs.label === "" || inputs.description === ""}
+          value="Добавить"
+          primary={true}
+        />
+      </div>
+    </StyledForm>
+  );
 }
 
 TaskForm.propTypes = {
