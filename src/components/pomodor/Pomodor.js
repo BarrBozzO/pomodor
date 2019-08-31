@@ -5,6 +5,8 @@ import { CSSTransition } from "react-transition-group";
 
 import Timer from "./PomodorTimer";
 import Settings from "./PomodorSettings";
+import clockIcon from "../../assets/svg/clock.svg";
+import controlsIcon from "../../assets/svg/controls.svg";
 
 const Container = styled.div`
   display: flex;
@@ -55,25 +57,27 @@ const Container = styled.div`
 `;
 
 const SwitchModeBtn = styled.button`
-  display: inline-block;
+  display: block;
   position: absolute;
-  top: 0;
-  right: 0;
-  width: auto;
-  height: 30px;
-  padding: 0 10px;
-  background: transparent;
+  top: 10px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
   border: none;
-  font-size: 14px;
-  text-transform: uppercase;
-  color: #999;
+  border-radius: 100%;
   cursor: pointer;
   transition: all 250ms;
-  transition-property: background, color;
+  transition-property: opacity, background;
+  background-color: transparent;
+  background-image: url(${({ icon }) => (icon ? icon : "")});
+  background-repeat: no-repeat;
+  background-size: 20px;
+  background-position: center;
+  opacity: 0.6;
 
   &:hover {
-    color: #666;
-    background: #efefef;
+    opacity: 1;
+    background-color: #f3f3f3;
   }
 `;
 
@@ -145,9 +149,8 @@ class Pomodor extends Component {
         <SwitchModeBtn
           disabled={showSettings === showTimer}
           onClick={handleSwitchModeClick.bind(this)}
-        >
-          {showTimer ? <span>настройки</span> : <span>таймер</span>}
-        </SwitchModeBtn>
+          icon={showTimer ? controlsIcon : clockIcon}
+        />
       </Container>
     );
   }
