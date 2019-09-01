@@ -36,6 +36,7 @@ function Button(props) {
       primary={props.primary}
       small={props.small}
       className={props.className}
+      type={props.type}
     >
       {props.value}
     </StyledButton>

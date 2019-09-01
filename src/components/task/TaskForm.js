@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import useForm from "../hooks/useForm";
+import useForm from "../../hooks/useForm";
 import Button from "../common/Button";
 import Input from "../common/Input";
 

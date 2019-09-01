@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
+import { periodTypes as PERIOD_TYPES } from "../../constants";
 import Button from "../common/Button";
 
 const ButtonsContainer = styled.div`
@@ -13,7 +14,7 @@ const ButtonsContainer = styled.div`
 function PomodorTimerControls(props) {
   const handleSet = type => {
     let newRemain = props.settings[type];
-    return () => props.handleSet(newRemain);
+    return () => props.handleSet(newRemain, type);
   };
 
   return (
@@ -43,9 +44,15 @@ function PomodorTimerControls(props) {
         />
       </ButtonsContainer>
       <ButtonsContainer>
-        <Button handleClick={handleSet("pomodoro")} value="Pomodor" />
-        <Button handleClick={handleSet("long")} value="Отдых" />
-        <Button handleClick={handleSet("short")} value="Перерыв" />
+        <Button
+          handleClick={handleSet("pomodoro")}
+          value={PERIOD_TYPES["pomodoro"]}
+        />
+        <Button handleClick={handleSet("long")} value={PERIOD_TYPES["long"]} />
+        <Button
+          handleClick={handleSet("short")}
+          value={PERIOD_TYPES["short"]}
+        />
       </ButtonsContainer>
     </div>
   );
