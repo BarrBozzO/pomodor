@@ -9,6 +9,7 @@ import {
 const initialState = {
   expire: 0,
   remains: 1500000,
+  type: null,
   started: 0,
   stopped: 0, // ?
   paused: 0,
@@ -34,19 +35,22 @@ const pomodorTimerReducer = (state = initialState, action) => {
         paused,
         state: "paused"
       };
-    case STOP_TIMER:
-      const { stopped } = action.payload;
+    case STOP_TIMER: {
+      const { stopped, type } = action.payload;
       return {
         ...state,
         remains: 0,
         stopped,
+        type,
         state: "stopped"
       };
+    }
     case SET_TIMER:
-      const { remains } = action.payload;
+      const { remains, type } = action.payload;
       return {
         ...state,
         remains,
+        type,
         expire: 0,
         started: 0,
         stopped: 0,

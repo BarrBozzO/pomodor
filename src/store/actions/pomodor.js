@@ -34,10 +34,11 @@ export const stopTimer = () => ({
   }
 });
 
-export const setTimer = remains => ({
+export const setTimer = (remains, type) => ({
   type: SET_TIMER,
   payload: {
-    remains
+    remains,
+    type
   }
 });
 
