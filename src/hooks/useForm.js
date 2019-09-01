@@ -22,6 +22,7 @@ export default function({ init = {}, submit, change }) {
   return {
     handleSubmit,
     handleChange,
+    setForm: setInputs,
     inputs
   };
 }

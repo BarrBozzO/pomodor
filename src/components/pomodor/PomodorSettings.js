@@ -3,8 +3,9 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 
 import { convertToMinutes, convertToMs } from "../../utils/timer";
+import { defaultSettings } from "../../constants";
 
-import useForm from "../hooks/useForm";
+import useForm from "../../hooks/useForm";
 import Button from "../common/Button";
 import Input from "../common/Input";
 import CheckBox from "../common/CheckBox";
@@ -67,7 +68,18 @@ function PomodorSettings(props) {
     return convertToMs(value);
   };
 
-  const { inputs, handleChange, handleSubmit } = useForm({
+  const onReset = () => {
+    const { long, short, pomodoro } = defaultSettings;
+    const { notifyAllowed } = inputs;
+    return setForm({
+      long,
+      short,
+      pomodoro,
+      notifyAllowed
+    });
+  };
+
+  const { inputs, handleChange, handleSubmit, setForm } = useForm({
     submit: onSubmit,
     change: onChange,
     init: { ...props.settings }
@@ -77,7 +89,11 @@ function PomodorSettings(props) {
     changeAllowed =
       long !== props.settings.long ||
       short !== props.settings.short ||
-      pomodoro !== props.settings.pomodoro;
+      pomodoro !== props.settings.pomodoro,
+    resetAllowed =
+      long !== defaultSettings.long ||
+      short !== defaultSettings.short ||
+      pomodoro !== defaultSettings.pomodoro;
 
   return (
     <StyledForm onSubmit={handleSubmit}>
@@ -124,10 +140,16 @@ function PomodorSettings(props) {
       </div>
       <div>
         <Button
-          type={"submit"}
+          type="submit"
           disabled={!changeAllowed}
           value="Изменить"
           primary={true}
+        />
+        <Button
+          type="button"
+          disabled={!resetAllowed}
+          value="Сбросить"
+          handleClick={onReset}
         />
       </div>
     </StyledForm>
