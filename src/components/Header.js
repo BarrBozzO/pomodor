@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 
 import tomatoLogo from "../assets/svg/tomato.svg";
@@ -10,7 +11,7 @@ const StyledHeader = styled.header`
 `;
 
 const Logo = styled.img.attrs({
-  src: tomatoLogo
+  src: tomatoLogo,
 })`
   width: 50px;
   height: 50px;
@@ -35,10 +36,53 @@ const StyledHeaderText = styled.h1`
   }
 `;
 
+const logoKeyFrames = [
+  {
+    transform: "rotate(0deg)",
+  },
+  {
+    transform: "rotate(360deg)",
+  },
+];
+
+const logoTiming = {
+  duration: 1000,
+  iterations: Infinity,
+};
+
 export default function Header() {
+  const logoRef = useRef(null);
+  const animation = useRef(null);
+  const timerState = useSelector((state) => state.pomodorTimer.state);
+
+  useEffect(() => {
+    if (logoRef.current) {
+      animation.current = logoRef.current.animate(logoKeyFrames, logoTiming);
+
+      if (timerState !== "started") {
+        animation.current.pause();
+      }
+
+      return () => animation.current.cancel();
+    }
+  }, []);
+
+  useEffect(() => {
+    if (animation.current) {
+      if (timerState === "started") {
+        animation.current.play();
+      } else {
+        animation.current.pause();
+        if (timerState === "stopped") {
+          animation.current.currentTime = 0;
+        }
+      }
+    }
+  }, [timerState]);
+
   return (
     <StyledHeader>
-      <Logo />
+      <Logo ref={logoRef} />
       <StyledHeaderText>Pomodor</StyledHeaderText>
     </StyledHeader>
   );
